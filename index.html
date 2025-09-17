@@ -3,29 +3,37 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>List Tugas</title>
+    <!-- blok zoom out -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>List tugas</title>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Font -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Bungee&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
+    <!--CSS-->
     <style>
         * {
             font-family: "Bitcount Grid Double", system-ui;
         }
+
+
         body {
             overflow-x: hidden;
+            /* halaman utama tidak bisa geser kiri kanan */
         }
+
         .mytitle {
             width: 100%;
             height: 300px;
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://wallpapercave.com/wp/wp7495801.jpg');
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('https://wallpapercave.com/wp/wp7495801.jpg');
             background-position: center;
             background-size: cover;
             color: white;
@@ -34,6 +42,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .mytitle>button {
             width: 200px;
             height: 30px;
@@ -42,6 +51,13 @@
             border-radius: 99px;
             border: 1px solid white;
         }
+
+        .mycard {
+            margin: 30px auto;
+            width: 95%;
+            max-width: 1200px;
+        }
+
         .mypost {
             width: 95%;
             max-width: 500px;
@@ -49,15 +65,22 @@
             padding: 10px;
             box-shadow: 0px 0px 6px 0px rgb(217, 212, 212);
         }
-        .mybtnss {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 10px;
+
+        .search-wrapper {
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto 20px auto;
         }
-        .mycard {
-            max-width: 1200px;
-            margin: 20px auto;
+
+        /* Biar tabel bisa geser di HP */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            min-width: 700px;
+            /* kasih lebar minimum biar scroll aktif */
         }
     </style>
 </head>
@@ -71,7 +94,7 @@
     <!-- FORM INPUT -->
     <form id="prForm" class="mypost">
         <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="tanggal" placeholder="Tgl dikasih">
+            <input type="date" class="form-control" id="tanggal">
             <label for="tanggal">Tgl dikasih</label>
         </div>
         <div class="form-floating mb-3">
@@ -90,7 +113,7 @@
             <textarea class="form-control" placeholder="Catatan" id="comment"></textarea>
             <label for="comment">Comments</label>
         </div>
-        <div class="mybtnss">
+        <div class="d-flex justify-content-center gap-2">
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="reset" class="btn btn-outline-primary">Reset</button>
         </div>
@@ -100,29 +123,27 @@
     <div class="mycard">
         <h3 class="text-center mb-3">Daftar Tugas</h3>
 
-        <!-- Search box -->
-        <div class="d-flex justify-content-center mb-3">
-            <input type="text" id="searchBox" class="form-control" placeholder="Cari tugas, pelajaran, atau deadline" style="max-width: 400px;">
+        <!-- Input Pencarian -->
+        <div class="form-floating mb-3 search-wrapper">
+            <input type="text" class="form-control" id="searchInput" placeholder="Cari tugas...">
+            <label for="searchInput">Cari tugas, pelajaran, atau deadline</label>
         </div>
 
-        <div class="d-flex justify-content-center">
-            <div class="table-responsive" style="max-width: 800px; width: 100%;">
-                <table class="table table-bordered table-striped table-hover text-center" id="prListWrapper">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>No</th>
-                            <th>Tgl Dikasih</th>
-                            <th>Nama Tugas</th>
-                            <th>Pelajaran</th>
-                            <th>Deadline</th>
-                            <th>Comment</th>
-                        </tr>
-                    </thead>
-                    <tbody id="prList">
-                        <!-- Data masuk lewat script -->
-                    </tbody>
-                </table>
-            </div>
+        <!-- table responsive -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover" id="prListWrapper">
+                <thead class="table-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Tgl Dikasih</th>
+                        <th>Nama Tugas</th>
+                        <th>Pelajaran</th>
+                        <th>Deadline</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody id="prList"></tbody>
+            </table>
         </div>
     </div>
 
@@ -139,43 +160,29 @@
             return dateStr;
         }
 
-        function renderTable(data) {
-            const list = document.getElementById("prList");
-            list.innerHTML = "";
-            data.forEach((pr, i) => {
-                list.innerHTML += `
-                    <tr>
-                        <td>${i + 1}</td>
-                        <td>${formatDate(pr.tanggal)}</td>
-                        <td>${pr.namaPR}</td>
-                        <td>${pr.pelajaran}</td>
-                        <td>${formatDate(pr.deadline)}</td>
-                        <td>${pr.comment || ""}</td>
-                    </tr>
-                `;
-            });
-        }
-
         async function loadPR() {
             const res = await fetch(API_URL);
             allPR = await res.json();
             renderTable(allPR);
         }
 
-        // Pencarian
-        document.getElementById("searchBox").addEventListener("input", (e) => {
-            const keyword = e.target.value.toLowerCase();
-            const filtered = allPR.filter(pr =>
-                pr.namaPR.toLowerCase().includes(keyword) ||
-                pr.pelajaran.toLowerCase().includes(keyword) ||
-                formatDate(pr.deadline).toLowerCase().includes(keyword) ||
-                formatDate(pr.tanggal).toLowerCase().includes(keyword) ||
-                (pr.comment || "").toLowerCase().includes(keyword)
-            );
-            renderTable(filtered);
-        });
+        function renderTable(data) {
+            const list = document.getElementById("prList");
+            list.innerHTML = "";
+            data.forEach((pr, i) => {
+                list.innerHTML += `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${formatDate(pr.tanggal)}</td>
+            <td>${pr.namaPR}</td>
+            <td>${pr.pelajaran}</td>
+            <td>${formatDate(pr.deadline)}</td>
+            <td>${pr.comment || ""}</td>
+          </tr>
+        `;
+            });
+        }
 
-        // Submit form
         document.getElementById("prForm").addEventListener("submit", async (e) => {
             e.preventDefault();
             const prData = {
@@ -193,7 +200,20 @@
             loadPR();
         });
 
+        document.getElementById("searchInput").addEventListener("input", (e) => {
+            const keyword = e.target.value.toLowerCase();
+            const filtered = allPR.filter(pr =>
+                (pr.tanggal && pr.tanggal.toLowerCase().includes(keyword)) ||
+                (pr.namaPR && pr.namaPR.toLowerCase().includes(keyword)) ||
+                (pr.pelajaran && pr.pelajaran.toLowerCase().includes(keyword)) ||
+                (pr.deadline && pr.deadline.toLowerCase().includes(keyword)) ||
+                (pr.comment && pr.comment.toLowerCase().includes(keyword))
+            );
+            renderTable(filtered);
+        });
+
         loadPR();
     </script>
 </body>
+
 </html>
