@@ -23,7 +23,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Bungee&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-        
+
     <!--CSS INTEGRETED-->
     <style>
         * {
@@ -33,7 +33,7 @@
         .mytitle {
             width: 100%;
             height: 300px;
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://th.bing.com/th/id/OIP.9Nv-KAXzpJ8YtdgJhofn1gHaEK?w=329&h=185&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3');
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://wallpapercave.com/wp/wp7495801.jpg');
             background-position: center;
             background-size: cover;
             color: white;
@@ -97,7 +97,11 @@
     <!-- FORM INPUT -->
     <form id="prForm" class="mypost">
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="namaPR" placeholder="Nama PR">
+            <input type="date" class="form-control" id="tanggal" placeholder="Tgl dikasih">
+            <label for="tanggal">Tgl dikasih</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="namaPR" placeholder="Nama Tugas">
             <label for="namaPR">Nama Tugas</label>
         </div>
         <div class="form-floating mb-3">
@@ -109,8 +113,8 @@
             <label for="deadline">Deadline</label>
         </div>
         <div class="form-floating mb-3">
-            <textarea class="form-control" placeholder="Catatan" id="floatingTextarea"></textarea>
-            <label for="floatingTextarea">Comments</label>
+            <textarea class="form-control" placeholder="Catatan" id="comment"></textarea>
+            <label for="comment">Comments</label>
         </div>
         <div class="mybtnss">
             <button type="submit" class="btn btn-primary">Save</button>
@@ -118,16 +122,18 @@
         </div>
     </form>
 
-    <!-- LIST HASIL PR -->
+    <!-- LIST TUGAS -->
     <div class="mycard">
         <h3 class="text-center mb-3">Daftar Tugas</h3>
         <table class="table table-bordered table-striped table-hover" id="prListWrapper">
             <thead class="table-dark">
                 <tr>
                     <th>No</th>
+                    <th>Tgl Dikasih</th>
                     <th>Nama Tugas</th>
                     <th>Pelajaran</th>
                     <th>Deadline</th>
+                    <th>Comment</th>
                 </tr>
             </thead>
             <tbody id="prList">
@@ -136,19 +142,8 @@
         </table>
     </div>
 
-    <style>
-        .mycard {
-            margin-top: 40px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 15px;
-            background: #fff;
-            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-        }
-    </style>
-
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbztWhGIOnjojFpvmfISTy2SUDBZM6c_IBQgQTzJ3-Ump9JGGRwAEHhVbWVt6saQT5Cqkw/exec";
+        const API_URL = "https://script.google.com/macros/s/AKfycbzzNF7hlkyi2BSxUwr__ZcbErd8RhHVAv3n1vm-AnG82-frUVRW3rwmd_ZbY2IfTiIvTg/exec";
 
         function formatDate(dateStr) {
             if (!dateStr) return "";
@@ -166,22 +161,26 @@
             list.innerHTML = "";
             data.forEach((pr, i) => {
                 list.innerHTML += `
-                    <tr>
-                        <td>${i + 1}</td>
-                        <td>${pr.namaPR}</td>
-                        <td>${pr.pelajaran}</td>
-                        <td>${formatDate(pr.deadline)}</td>
-                    </tr>
-                `;
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${formatDate(pr.tanggal)}</td>
+                    <td>${pr.namaPR}</td>
+                    <td>${pr.pelajaran}</td>
+                    <td>${formatDate(pr.deadline)}</td>
+                    <td>${pr.comment || ""}</td>
+                </tr>
+            `;
             });
         }
 
         document.getElementById("prForm").addEventListener("submit", async (e) => {
             e.preventDefault();
             const prData = {
+                tanggal: document.getElementById("tanggal").value,
                 namaPR: document.getElementById("namaPR").value,
                 pelajaran: document.getElementById("pelajaran").value,
                 deadline: document.getElementById("deadline").value,
+                comment: document.getElementById("comment").value,
             };
             await fetch(API_URL, {
                 method: "POST",
@@ -196,7 +195,3 @@
 </body>
 
 </html>
-<!-- NAMA: M.YUSUF AFFANDI
-    KELAS:XI TKJ 4
-    ABSEN:11 -->
-
