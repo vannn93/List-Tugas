@@ -123,24 +123,29 @@
     </form>
 
     <!-- LIST TUGAS -->
-    <div class="mycard">
-        <h3 class="text-center mb-3">Daftar Tugas</h3>
-        <table class="table table-bordered table-striped table-hover" id="prListWrapper">
-            <thead class="table-dark">
-                <tr>
-                    <th>No</th>
-                    <th>Tgl Dikasih</th>
-                    <th>Nama Tugas</th>
-                    <th>Pelajaran</th>
-                    <th>Deadline</th>
-                    <th>Comment</th>
-                </tr>
-            </thead>
-            <tbody id="prList">
-                <!-- Data masuk lewat script -->
-            </tbody>
-        </table>
+  <!-- LIST TUGAS -->
+<div class="mycard">
+    <h3 class="text-center mb-3">Daftar Tugas</h3>
+    <div class="d-flex justify-content-center">
+        <div class="table-responsive" style="max-width: 800px; width: 100%;">
+            <table class="table table-bordered table-striped table-hover text-center" id="prListWrapper">
+                <thead class="table-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Tgl Dikasih</th>
+                        <th>Nama Tugas</th>
+                        <th>Pelajaran</th>
+                        <th>Deadline</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody id="prList">
+                    <!-- Data masuk lewat script -->
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzzNF7hlkyi2BSxUwr__ZcbErd8RhHVAv3n1vm-AnG82-frUVRW3rwmd_ZbY2IfTiIvTg/exec";
@@ -195,6 +200,7 @@
 </body>
 
 </html>
+
 
 
 
